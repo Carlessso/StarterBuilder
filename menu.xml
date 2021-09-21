@@ -2,6 +2,10 @@
     <menuitem label='_t{Administration}'>
         <icon>fas:home fa-fw</icon>
         <menu>
+              <menuitem label='GrapesView'>
+                  <icon>fas:tachometer-alt fa-fw</icon>
+                  <action>GrapesView</action>
+              </menuitem>
               <menuitem label='Dashboard'>
                   <icon>fas:tachometer-alt fa-fw</icon>
                   <action>SystemAdministrationDashboard</action>
