@@ -1,11 +1,10 @@
 <?php
 /**
- * LoginForm
  *
  * @version    1.0
  * @package    control
  * @subpackage admin
- * @author     Guilherme Cegolini
+ * @author     Matheus Carlesso
  * @copyright  Copyright (c) 2006 Adianti Solutions Ltd. (http://www.adianti.com.br)
  * @license    http://www.adianti.com.br/framework-license
  */
