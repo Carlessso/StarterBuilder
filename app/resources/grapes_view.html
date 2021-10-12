@@ -9,6 +9,27 @@ rel="stylesheet"
 <script src="https://unpkg.com/grapesjs"></script>
 <script src="dist/grapesjs-plugin-forms.min.js"></script>
 <script src="dist/grapesjs-blocks-basic.min.js"></script>
+
+<div class="container-form-page">
+    <form class="form-starter-page" name="form-starter-page" id="form-starter-page" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
+      <div id="i6hl">
+        <label>Código</label>
+        <input id="id" readonly="readonly" style="width: 10%;"name="id" type="text"/>
+      </div>
+      <div id="izvj">
+        <label>Nome</label>
+        <input required="required" id="nome" name="nome" type="text"/>
+      </div>
+      <div id="izvj">
+        <label>Classe</label>
+        <input required="required" id="classe" name="classe"type="text"/>
+      </div>
+      <button id="tbutton_btn_salvar" name="btn_salvar" class="btn btn-primary" style="float: right; font-size: 16px; padding: 5px 20px; margin: 20px 150px;" onclick="grapesSave();return false;" aria-label="Salvar">
+        <span>Salvar</span> 
+    </button> 
+    </form>
+</div>
+
 <div class="panel__top">
     <div class="panel__basic-actions"></div>
     <div class="panel__devices"></div>
@@ -30,7 +51,7 @@ rel="stylesheet"
 
 
 <script type="text/javascript">
-    const editor = grapesjs.init({
+    var editor = grapesjs.init({
                 plugins: ['gjs-blocks-basic', 'grapesjs-plugin-forms'],
         pluginsOpts: {
           'gjs-blocks-basic': {},
@@ -170,10 +191,26 @@ rel="stylesheet"
         styleManager: {
             appendTo: '.styles-container',
             sectors: [{
+              name: 'General',
+              buildProps: ['float', 'display', 'position', 'top', 'right', 'left', 'bottom'],
+              properties:[{
+                  name: 'Alignment',
+                  property: 'float',
+                  type: 'radio',
+                  defaults: 'none',
+                  list: [
+                    { value: 'none', className: 'fa fa-times'},
+                    { value: 'left', className: 'fa fa-align-left'},
+                    { value: 'right', className: 'fa fa-align-right'}
+                  ],
+                },
+                { property: 'position', type: 'select'}
+              ],
+            },{
                 name: 'Dimension',
                 open: false,
                 // Use built-in properties
-                buildProps: ['width', 'min-height', 'padding'],
+                buildProps: ['width', 'flex-width', 'height', 'max-width', 'min-height', 'margin', 'padding'],
                 // Use `properties` to define/override single property
                 properties: [
                 {
@@ -185,6 +222,7 @@ rel="stylesheet"
                     units: ['px', '%'], // Units, available only for 'integer' types
                     defaults: 'auto', // Default value
                     min: 0, // Min value, available only for 'integer' types
+
                 }
                 ]
             },{
@@ -206,7 +244,249 @@ rel="stylesheet"
                     ],
                 }
                 ]
-            }]
+            },{
+                name: 'Typography',
+                open: false,
+                buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height', 'text-align', 'text-decoration', 'text-shadow'],
+                properties:[
+                  { name: 'Font', property: 'font-family'},
+                  { name: 'Weight', property: 'font-weight'},
+                  { name:  'Font color', property: 'color'},
+                  {
+                    property: 'text-align',
+                    type: 'radio',
+                    defaults: 'left',
+                    list: [
+                      { value : 'left',  name : 'Left',    className: 'fa fa-align-left'},
+                      { value : 'center',  name : 'Center',  className: 'fa fa-align-center' },
+                      { value : 'right',   name : 'Right',   className: 'fa fa-align-right'},
+                      { value : 'justify', name : 'Justify',   className: 'fa fa-align-justify'}
+                    ],
+                  },{
+                    property: 'text-decoration',
+                    type: 'radio',
+                    defaults: 'none',
+                    list: [
+                      { value: 'none', name: 'None', className: 'fa fa-times'},
+                      { value: 'underline', name: 'underline', className: 'fa fa-underline' },
+                      { value: 'line-through', name: 'Line-through', className: 'fa fa-strikethrough'}
+                    ],
+                  },{
+                    property: 'text-shadow',
+                    properties: [
+                      { name: 'X position', property: 'text-shadow-h'},
+                      { name: 'Y position', property: 'text-shadow-v'},
+                      { name: 'Blur', property: 'text-shadow-blur'},
+                      { name: 'Color', property: 'text-shadow-color'}
+                    ],
+                }],
+              },{
+                name: 'Decorations',
+                open: false,
+                buildProps: ['opacity', 'border-radius', 'border', 'box-shadow', 'background-bg'],
+                properties: [{
+                  type: 'slider',
+                  property: 'opacity',
+                  defaults: 1,
+                  step: 0.01,
+                  max: 1,
+                  min:0,
+                },{
+                  property: 'border-radius',
+                  properties  : [
+                    { name: 'Top', property: 'border-top-left-radius'},
+                    { name: 'Right', property: 'border-top-right-radius'},
+                    { name: 'Bottom', property: 'border-bottom-left-radius'},
+                    { name: 'Left', property: 'border-bottom-right-radius'}
+                  ],
+                },{
+                  property: 'box-shadow',
+                  properties: [
+                    { name: 'X position', property: 'box-shadow-h'},
+                    { name: 'Y position', property: 'box-shadow-v'},
+                    { name: 'Blur', property: 'box-shadow-blur'},
+                    { name: 'Spread', property: 'box-shadow-spread'},
+                    { name: 'Color', property: 'box-shadow-color'},
+                    { name: 'Shadow type', property: 'box-shadow-type'}
+                  ],
+                },{
+                  id: 'background-bg',
+                  property: 'background',
+                  type: 'bg',
+                },],
+              },{
+                name: 'Extra',
+                open: false,
+                buildProps: ['transition', 'perspective', 'transform'],
+                properties: [{
+                  property: 'transition',
+                  properties:[
+                    { name: 'Property', property: 'transition-property'},
+                    { name: 'Duration', property: 'transition-duration'},
+                    { name: 'Easing', property: 'transition-timing-function'}
+                  ],
+                },{
+                  property: 'transform',
+                  properties:[
+                    { name: 'Rotate X', property: 'transform-rotate-x'},
+                    { name: 'Rotate Y', property: 'transform-rotate-y'},
+                    { name: 'Rotate Z', property: 'transform-rotate-z'},
+                    { name: 'Scale X', property: 'transform-scale-x'},
+                    { name: 'Scale Y', property: 'transform-scale-y'},
+                    { name: 'Scale Z', property: 'transform-scale-z'}
+                  ],
+                }]
+              },{
+                name: 'Flex',
+                open: false,
+                properties: [{
+                  name: 'Flex Container',
+                  property: 'display',
+                  type: 'select',
+                  defaults: 'block',
+                  list: [
+                    { value: 'block', name: 'Disable'},
+                    { value: 'flex', name: 'Enable'}
+                  ],
+                },{
+                  name: 'Flex Parent',
+                  property: 'label-parent-flex',
+                  type: 'integer',
+                },{
+                  name      : 'Direction',
+                  property  : 'flex-direction',
+                  type    : 'radio',
+                  defaults  : 'row',
+                  list    : [{
+                            value   : 'row',
+                            name    : 'Row',
+                            className : 'icons-flex icon-dir-row',
+                            title   : 'Row',
+                          },{
+                            value   : 'row-reverse',
+                            name    : 'Row reverse',
+                            className : 'icons-flex icon-dir-row-rev',
+                            title   : 'Row reverse',
+                          },{
+                            value   : 'column',
+                            name    : 'Column',
+                            title   : 'Column',
+                            className : 'icons-flex icon-dir-col',
+                          },{
+                            value   : 'column-reverse',
+                            name    : 'Column reverse',
+                            title   : 'Column reverse',
+                            className : 'icons-flex icon-dir-col-rev',
+                          }],
+                },{
+                  name      : 'Justify',
+                  property  : 'justify-content',
+                  type    : 'radio',
+                  defaults  : 'flex-start',
+                  list    : [{
+                            value   : 'flex-start',
+                            className : 'icons-flex icon-just-start',
+                            title   : 'Start',
+                          },{
+                            value   : 'flex-end',
+                            title    : 'End',
+                            className : 'icons-flex icon-just-end',
+                          },{
+                            value   : 'space-between',
+                            title    : 'Space between',
+                            className : 'icons-flex icon-just-sp-bet',
+                          },{
+                            value   : 'space-around',
+                            title    : 'Space around',
+                            className : 'icons-flex icon-just-sp-ar',
+                          },{
+                            value   : 'center',
+                            title    : 'Center',
+                            className : 'icons-flex icon-just-sp-cent',
+                          }],
+                },{
+                  name      : 'Align',
+                  property  : 'align-items',
+                  type    : 'radio',
+                  defaults  : 'center',
+                  list    : [{
+                            value   : 'flex-start',
+                            title    : 'Start',
+                            className : 'icons-flex icon-al-start',
+                          },{
+                            value   : 'flex-end',
+                            title    : 'End',
+                            className : 'icons-flex icon-al-end',
+                          },{
+                            value   : 'stretch',
+                            title    : 'Stretch',
+                            className : 'icons-flex icon-al-str',
+                          },{
+                            value   : 'center',
+                            title    : 'Center',
+                            className : 'icons-flex icon-al-center',
+                          }],
+                },{
+                  name: 'Flex Children',
+                  property: 'label-parent-flex',
+                  type: 'integer',
+                },{
+                  name:     'Order',
+                  property:   'order',
+                  type:     'integer',
+                  defaults :  0,
+                  min: 0
+                },{
+                  name    : 'Flex',
+                  property  : 'flex',
+                  type    : 'composite',
+                  properties  : [{
+                          name:     'Grow',
+                          property:   'flex-grow',
+                          type:     'integer',
+                          defaults :  0,
+                          min: 0
+                        },{
+                          name:     'Shrink',
+                          property:   'flex-shrink',
+                          type:     'integer',
+                          defaults :  0,
+                          min: 0
+                        },{
+                          name:     'Basis',
+                          property:   'flex-basis',
+                          type:     'integer',
+                          units:    ['px','%',''],
+                          unit: '',
+                          defaults :  'auto',
+                        }],
+                },{
+                  name      : 'Align',
+                  property  : 'align-self',
+                  type      : 'radio',
+                  defaults  : 'auto',
+                  list    : [{
+                            value   : 'auto',
+                            name    : 'Auto',
+                          },{
+                            value   : 'flex-start',
+                            title    : 'Start',
+                            className : 'icons-flex icon-al-start',
+                          },{
+                            value   : 'flex-end',
+                            title    : 'End',
+                            className : 'icons-flex icon-al-end',
+                          },{
+                            value   : 'stretch',
+                            title    : 'Stretch',
+                            className : 'icons-flex icon-al-str',
+                          },{
+                            value   : 'center',
+                            title    : 'Center',
+                            className : 'icons-flex icon-al-center',
+                          }],
+                }]
+              }]
         },
         traitManager: {
             appendTo: '.traits-container',
@@ -232,7 +512,7 @@ rel="stylesheet"
             opts.abort = 1;
         }
     });
-    editor.on('run:export-template', () => storeHtmlFile());
+    editor.on('run:export-template', () => console.log('export command'));
     editor.on('abort:export-template', () => console.log('Command aborted'));
     
     // Define commands
@@ -324,10 +604,10 @@ rel="stylesheet"
     });
     
     
-    function getHtmlCode(code, callBack)
+    function getHtmlCode(code, classe, callBack)
     {
-        var url = 'engine.php?class=GrapesService&method=storeHtml&static=1&code='+code;
-        
+        var url = 'engine.php?class=GrapesService&method=storeHtml&static=1&classe='+classe+'&code='+code;
+
         fetch(url, { method : "GET", credentials :"include" })
         .then(response => response.json())
         .then(response =>
@@ -335,14 +615,30 @@ rel="stylesheet"
             callBack(response);
         });
     }
-    
-    function storeHtmlFile()
-    {
-        var htmlCode = editor.getHtml();
 
-        getHtmlCode(htmlCode, (response) =>
+    function grapesSave() {
+        
+        var htmlCode = editor.getHtml();
+        var id;
+        var nome;
+        var classe;
+
+        id     = $('#id').val();
+        nome   = $('#nome').val();
+        classe = $('#classe').val();
+
+        if (!nome || !classe) {
+            alert('Preencha os campos obrigatórios!');
+            return;
+        }
+
+        console.log(id,nome,classe);
+
+        getHtmlCode(htmlCode, classe, (response) =>
         {
-            console.log(response);
+            if (response.success) {
+                __adianti_post_data('form-starter-page', 'class=GrapesView&method=onSave&static=1&id='+id+'&nome='+nome+'&classe='+classe);
+            }
         });
     }
 

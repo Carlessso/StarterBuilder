@@ -15,4 +15,9 @@ class CommonPage extends TPage
         parent::__construct();
         parent::add(new TLabel('Common page'));
     }
+
+    public function onLoad()
+    {
+        
+    }
 }
