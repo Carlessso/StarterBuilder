@@ -1,4 +1,4 @@
-CREATE TABLE form(
+CREATE TABLE component(
 	id serial not null PRIMARY KEY,
 	system_user_id integer not null,
 	name VARCHAR(50) NOT NULL,
@@ -32,18 +32,20 @@ CREATE TABLE system_group_pages(
 	FOREIGN KEY (page_id) REFERENCES page(id)
 );
 
-CREATE TABLE page_forms(
+CREATE TABLE page_components(
 	id serial not null PRIMARY KEY,
 	page_id INTEGER NOT NULL,
-	form_id INTEGER NOT NULL,
+	component_id INTEGER NOT NULL,
 	FOREIGN KEY (page_id) REFERENCES page(id),
-	FOREIGN KEY (form_id) REFERENCES form(id)
+	FOREIGN KEY (component_id) REFERENCES component(id)
 );
 
 CREATE TABLE class(
 	id serial not null PRIMARY KEY,
 	system_user_id integer not null,
+	page_id integer not null,
 	name VARCHAR(50) not null,
 	path VARCHAR(50) not null,
-	dt_creation TIMESTAMP without time zone default now()
+	dt_creation TIMESTAMP without time zone default now(),
+	FOREIGN KEY (page_id) REFERENCES page(id)
 );

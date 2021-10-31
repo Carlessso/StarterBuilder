@@ -1,6 +1,6 @@
 <!--[main]-->
 <link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">
-<link rel="stylesheet" href="app/resources/grapes_view.css">
+<link rel="stylesheet" href="app/resources/grapes_component_view.css">
 <!-- <link
 href="https://unpkg.com/grapesjs/dist/css/grapes.min.css"
 rel="stylesheet"
@@ -31,7 +31,7 @@ rel="stylesheet"
 <script src="dist/grapesjs-style-bg.min.js"></script>
 
 <div id="container-form-page" class="container-form-page">
-    <form class="form-starter-page" name="form-starter-page" id="form-starter-page" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
+    <form class="form-component-page" name="form-component-page" id="form-component-page" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
       <div id="i6hl">
         <label>Código</label>
         <input id="id" readonly="readonly" style="width: 10%;"name="id" type="text"/>
@@ -571,7 +571,7 @@ rel="stylesheet"
         getHtmlCode(htmlCode, cssCode, nome, (response) =>
         {
             if (response.success) {
-                __adianti_post_data('form-starter-page', 'class=GrapesView&method=onSave&static=1&id='+id+'&name='+nome+'&path='+response.path);
+                __adianti_post_data('form-component-page', 'class=GrapesComponentView&method=onSave&static=1&id='+id+'&name='+nome+'&path='+response.path);
             }
         });
     }

@@ -1,10 +1,10 @@
 <?php
 /**
- * class Form
+ * class Class
  */
-class Form extends TRecord
+class Classe extends TRecord
 {
-    const TABLENAME = 'form';
+    const TABLENAME = 'class';
     const PRIMARYKEY= 'id';
     const IDPOLICY =  'serial'; // {max, serial}
     
@@ -18,6 +18,6 @@ class Form extends TRecord
         parent::addAttribute('name');
         parent::addAttribute('path');
         parent::addAttribute('dt_creation');
-        parent::addAttribute('dt_update');
+        parent::addAttribute('page_id');
     }
 }

@@ -8,7 +8,7 @@
  * @copyright  Copyright (c) 2006 Adianti Solutions Ltd. (http://www.adianti.com.br)
  * @license    http://www.adianti.com.br/framework-license
  */
-class GrapesView extends TPage
+class GrapesComponentView extends TPage
 {
     protected $form; // form
     protected $form_title; // form_title
@@ -23,7 +23,7 @@ class GrapesView extends TPage
     {
         parent::__construct();
 
-        $this->html = new THtmlRenderer('app/resources/grapes_view.html');
+        $this->html = new THtmlRenderer('app/resources/grapes_component_view.html');
         
         // $this->html->enableSection('main', array('form_title' => $this->form_title, 'form' => $this->form));
         $this->html->enableSection('main');
@@ -36,23 +36,18 @@ class GrapesView extends TPage
         try
         {
             TTransaction::open('starter');
-            $object = new Page($param['id']);
-
-            $object->classe = $object->class;
+            $object = new Component($param['id']);
             TTransaction::close();
 
-            TForm::sendData('form-starter-page', $object);
+            TForm::sendData('form-component-page', $object);
 
             TScript::create("$('#classe').attr('readonly', 'readonly');");
 
-            $html_name = strtolower($object->classe);
-
-            $html_content = file_get_contents("app/resources/grapes_files/{$html_name}.html");
+            $html_content = file_get_contents("{$object->path}");
 
             TScript::create("let sethtmlgrapes = setTimeout(function() {
                           editor.setComponents('{$html_content}');
                         }, 2000)");
-
 
         }
         catch (Exception $e)
@@ -67,21 +62,23 @@ class GrapesView extends TPage
         {
             TTransaction::open('starter');
             
-            $page = new Page;
+            $page = new Component;
 
             if (!empty($param['id'])) 
             {
                 $page->id = $param['id'];
             }
 
-            $page->nome  = $param['nome'];
-            $page->class = preg_replace('/\s+/', '', $param['classe']);
+            $page->name           = $param['name'];
+            $page->path           = $param['path'];
+            $page->system_user_id = TSession::getValue('userid');
 
             $page->store();
 
             TTransaction::close();
 
-            new TMessage('info', 'Página salva com sucesso!');
+            new TMessage('info', 'Componente salvo com sucesso!');
+            TForm::sendData('form-component-page', $page);
         }
         catch(Exception $e)
         {
@@ -92,7 +89,9 @@ class GrapesView extends TPage
 
     public function onLoad()
     {
-        
+        TScript::create("let clearhtmlGrapes = setTimeout(function() {
+              editor.setComponents(' ');
+            }, 2000)");   
     }
 
 }

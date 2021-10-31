@@ -37,22 +37,17 @@ class GrapesView extends TPage
         {
             TTransaction::open('starter');
             $object = new Page($param['id']);
-
-            $object->classe = $object->class;
             TTransaction::close();
 
             TForm::sendData('form-starter-page', $object);
 
             TScript::create("$('#classe').attr('readonly', 'readonly');");
 
-            $html_name = strtolower($object->classe);
-
-            $html_content = file_get_contents("app/resources/grapes_files/{$html_name}.html");
+            $html_content = file_get_contents("{$object->path}");
 
             TScript::create("let sethtmlgrapes = setTimeout(function() {
                           editor.setComponents('{$html_content}');
                         }, 2000)");
-
 
         }
         catch (Exception $e)

@@ -1,10 +1,10 @@
 <?php
 /**
- * class Class
+ * class Component
  */
-class Class extends TRecord
+class Component extends TRecord
 {
-    const TABLENAME = 'class';
+    const TABLENAME = 'component';
     const PRIMARYKEY= 'id';
     const IDPOLICY =  'serial'; // {max, serial}
     
@@ -18,5 +18,6 @@ class Class extends TRecord
         parent::addAttribute('name');
         parent::addAttribute('path');
         parent::addAttribute('dt_creation');
+        parent::addAttribute('dt_update');
     }
 }

@@ -10,6 +10,7 @@ class TApplication extends AdiantiCoreApplication
         new TSession;
         ApplicationTranslator::setLanguage( TSession::getValue('user_language'), true ); // multi-lang
         
+        // var_dump($_REQUEST);die;
         if ($_REQUEST)
         {
             $ini = AdiantiApplicationConfig::get();

@@ -13,7 +13,7 @@ if ( TSession::getValue('logged') )
 {
     $content = file_get_contents("app/templates/{$theme}/layout.html");
 
-    if ($class == 'GrapesView') 
+    if (in_array($class, $ini['grapes_layout']['classes'])) 
     {
         $content = file_get_contents("app/resources/grapes_layout.html");
     }

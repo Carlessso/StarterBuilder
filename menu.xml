@@ -101,11 +101,20 @@
         </menu>
     </menuitem>
         
-    <menuitem label='Grapes'>
+    <menuitem label='StarterBuilder'>
+        <icon>fas:table fa-fw</icon>
         <menu>
-          <menuitem label='Páginas'>
-              <icon>fas:tachometer-alt fa-fw</icon>
-              <action>PaginasList</action>
+          <menuitem label='Classes'>
+              <icon>fas:desktop fa-fw</icon>
+              <action>GrapesClassesList</action>
+          </menuitem>
+          <menuitem label='Components'>
+              <icon>fas:desktop fa-fw</icon>
+              <action>GrapesComponentsList</action>
+          </menuitem>
+          <menuitem label='Pages'>
+              <icon>fas:desktop fa-fw</icon>
+              <action>GrapesPagesList</action>
           </menuitem>
         </menu>
     </menuitem>
