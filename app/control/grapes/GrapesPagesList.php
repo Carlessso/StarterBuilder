@@ -41,6 +41,7 @@ class GrapesPagesList extends TPage
         // add form actions
         $this->form->addAction('Find', new TAction([$this, 'onSearch']), 'fa:search blue');
         $this->form->addActionLink('New',  new TAction([$this, 'openGrapesPageForm']), 'fa:plus-circle green');
+        $this->form->addActionLink('With components',  new TAction(['GrapesPageComponentsForm', 'onClear']), 'fa:plus-circle green');
         $this->form->addActionLink('Clear',  new TAction([$this, 'clear']), 'fa:eraser red');
         
         // keep the form filled with the search data

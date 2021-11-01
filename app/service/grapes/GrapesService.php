@@ -202,4 +202,42 @@ class GrapesService
 
 		return $php_file_name;
 	}
+
+	public static function storePageComponents($page, $components)
+	{
+		$file_name = $page->name;
+
+		$file_name = preg_replace('/\s+/', '', $file_name);
+
+		$lower_class = strtolower($file_name);
+
+		$html_file_name = "app/resources/grapes_pages/{$lower_class}.html";
+
+		try 
+		{
+			if (file_exists($html_file_name)) {
+				unlink($html_file_name);
+			}
+
+			$final_html = ' ';
+			
+			foreach($components as $component)
+			{				
+				$componente = Component::find($component);
+
+				$final_html .= file_get_contents($componente->path);
+			}
+
+			//creates the html file
+			file_put_contents($html_file_name, $final_html);
+
+			chmod($html_file_name, 0777);
+
+			return $html_file_name;
+		} 
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}
 }

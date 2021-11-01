@@ -1,10 +1,10 @@
 <?php
 /**
- * class PageForm
+ * class PageComponent
  */
-class PageForm extends TRecord
+class PageComponent extends TRecord
 {
-    const TABLENAME = 'page_forms';
+    const TABLENAME = 'page_components';
     const PRIMARYKEY= 'id';
     const IDPOLICY =  'serial'; // {max, serial}
     
@@ -15,6 +15,7 @@ class PageForm extends TRecord
     {
         parent::__construct($id, $callObjectLoad);
         parent::addAttribute('page_id');
-        parent::addAttribute('form_id');
+        parent::addAttribute('component_id');
     }
+
 }

@@ -84,9 +84,6 @@ class GrapesClassForm extends TPage
             $classe->page_id        = $param['page_id'];
             $classe->system_user_id = TSession::getValue('userid');
 
-            echo '<pre>' . var_export($classe, true) . '</pre>';die;
-            
-
             $classe->store();
 
             TTransaction::close();
