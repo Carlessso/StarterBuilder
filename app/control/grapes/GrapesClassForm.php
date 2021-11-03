@@ -88,7 +88,7 @@ class GrapesClassForm extends TPage
 
             TTransaction::close();
 
-            new TMessage('info', 'Classe criada com sucesso!');
+            new TMessage('info', "Classe criada com sucesso! O caminho do arquivo para programação é:<br>{$classe->path}");
             TForm::sendData('form_classe', $classe);
         }
         catch(Exception $e)

@@ -97,4 +97,9 @@ class GrapesComponentsList extends TPage
     {
         AdiantiCoreApplication::gotoPage('GrapesComponentView', 'onLoad');
     }
+
+    public function onBackFromGrapes($param = null)
+    {
+        AdiantiCoreApplication::gotoPage('GrapesComponentsList', 'onReload');
+    }
 }

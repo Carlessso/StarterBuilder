@@ -89,9 +89,6 @@ class GrapesComponentView extends TPage
 
     public function onLoad()
     {
-        TScript::create("let clearhtmlGrapes = setTimeout(function() {
-              editor.setComponents(' ');
-            }, 2000)");   
     }
 
 }

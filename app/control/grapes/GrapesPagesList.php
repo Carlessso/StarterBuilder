@@ -98,4 +98,9 @@ class GrapesPagesList extends TPage
     {
         AdiantiCoreApplication::gotoPage('GrapesView', 'onLoad');
     }
+
+    public function onBackFromGrapes($param = null)
+    {
+        AdiantiCoreApplication::gotoPage('GrapesPagesList', 'onReload');
+    }
 }

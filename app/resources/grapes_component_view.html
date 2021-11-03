@@ -31,17 +31,18 @@ rel="stylesheet"
 <script src="dist/grapesjs-style-bg.min.js"></script>
 
 <div id="container-form-page" class="container-form-page">
-    <form class="form-component-page" name="form-component-page" id="form-component-page" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
+    <div class="close-form-page"><h5 class="title-form-page">Save Page</h5><i onclick="handleClickCloseForm()" class="fas fa-window-close"></i></div>
+    <form class="form-starter-page" name="form-starter-page" id="form-starter-page" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
       <div id="i6hl">
         <label>Código</label>
-        <input id="id" readonly="readonly" style="width: 10%;"name="id" type="text"/>
+        <input id="id" readonly="readonly" style="width: 20%;"name="id" type="text"/>
       </div>
       <div id="izvj">
         <label>Nome</label>
-        <input required="required" id="nome" name="name" type="text"/>
+        <input required="required" id="nome" style="width: 70%;"name="name" type="text"/>
       </div>
       <button id="tbutton_btn_salvar" name="btn_salvar" class="btn btn-primary" style="float: right; font-size: 16px; padding: 5px 20px; margin: 20px 150px;" onclick="grapesSave();return false;" aria-label="Salvar">
-        <span>Salvar</span> 
+        <span>Save</span> 
     </button> 
     </form>
 </div>
@@ -414,7 +415,7 @@ rel="stylesheet"
       var modal = editor.Modal;
       var cmdm = editor.Commands;
       cmdm.add('canvas-clear', function() {
-        if(confirm('Areeee you sure to clean the canvas?')) {
+        if(confirm('Are you sure to clean the canvas?')) {
           var comps = editor.DomComponents.clear();
           setTimeout(function(){ localStorage.clear()}, 0)
         }
@@ -432,13 +433,28 @@ rel="stylesheet"
         stop: function() {},
       });
 
+      cmdm.add('set-device-mobile', {
+        run: function(ed) { ed.setDevice('Mobile portrait') },
+        stop: function() {},
+      });
+
 
       pn.addButton('options', {
         id: 'open-info',
-        className: 'fa fa-question-circle',
+        className: 'fas fa-save',
         command: function() { openClassForm() },
         attributes: {
-          'title': 'About',
+          'title': 'Save',
+          'data-tooltip-pos': 'bottom',
+        },
+      });
+
+      pn.addButton('options', {
+        id: 'back-button',
+        className: 'fas fa-arrow-left',
+        command: function() { openBackWindow() },
+        attributes: {
+          'title': 'Back to List',
           'data-tooltip-pos': 'bottom',
         },
       });
@@ -536,6 +552,16 @@ rel="stylesheet"
       }
     }
     
+    function openBackWindow()
+    {
+        __adianti_question('Back to List', 'Do you wanna back to list?', function() {__adianti_load_page('index.php?class=GrapesComponentsList&method=onBackFromGrapes');} , function() {} , 'Yes', 'Stay');
+    }
+
+    function handleClickCloseForm()
+    {
+      $('#container-form-page').hide();
+    }
+
     function getHtmlCode(htmlCode, cssCode, name, callBack)
     {
         var url = 'engine.php?class=GrapesService&method=storePageFile&static=1';

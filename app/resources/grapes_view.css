@@ -609,8 +609,54 @@
 }
 
 .container-form-page{
+    display: none;
     position: absolute;
     z-index: 1000;
     background-color: white;
-    display: none;
+    top: 200px;
+    left: 30%;
+    width: 400px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    box-shadow: 5px 8px grey;
+}
+
+.container-form-page label{
+    width: 60px;
+}
+
+.container-form-page div{
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.container-form-page button{
+    font-size: 14px !important;
+    padding: 5px 15px !important;
+    margin: 20px 160px !important;
+    background-color: purple !important;
+    border-color: purple !important;
+}
+
+.close-form-page{
+    display: flex;
+}
+
+.close-form-page i{
+    cursor: pointer;
+    font-size: 20px;
+    color: gray;
+}
+
+.title-form-page{
+    width: 95%;
+    padding-left: 40px;
+}
+
+
+[data-tooltip="View components"]{
+    background-image: url("data:image/svg+xml, %3Csvg%20aria-hidden%3D%22true%22%20focusable%3D%22false%22%20data-prefix%3D%22far%22%20data-icon%3D%22square%22%20class%3D%22svg-inline--fa%20fa-square%20fa-w-14%22%20role%3D%22img%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20448%20512%22%3E%3Cpath%20fill%3D%22gray%22%20d%3D%22M400%2032H48C21.5%2032%200%2053.5%200%2080v352c0%2026.5%2021.5%2048%2048%2048h352c26.5%200%2048-21.5%2048-48V80c0-26.5-21.5-48-48-48zm-6%20400H54c-3.3%200-6-2.7-6-6V86c0-3.3%202.7-6%206-6h340c3.3%200%206%202.7%206%206v340c0%203.3-2.7%206-6%206z%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: center;
 }
