@@ -33,15 +33,15 @@ class GrapesComponentsList extends TPage
         
         // creates the form
         $this->form = new BootstrapFormBuilder('form_search_page');
-        $this->form->setFormTitle('Components');
+        $this->form->setFormTitle('Componentes');
         
         $name = new TEntry('name');
-        $this->form->addFields( [new TLabel('Name:')], [$name] );
+        $this->form->addFields( [new TLabel('Nome:')], [$name] );
         
         // add form actions
-        $this->form->addAction('Find', new TAction([$this, 'onSearch']), 'fa:search blue');
-        $this->form->addActionLink('New',  new TAction([$this, 'openGrapesComponentForm']), 'fa:plus-circle green');
-        $this->form->addActionLink('Clear',  new TAction([$this, 'clear']), 'fa:eraser red');
+        $this->form->addAction('Buscar', new TAction([$this, 'onSearch']), 'fa:search blue');
+        $this->form->addActionLink('Cadastrar',  new TAction([$this, 'openGrapesComponentForm']), 'fa:plus-circle green');
+        $this->form->addActionLink('Limpar',  new TAction([$this, 'clear']), 'fa:eraser red');
         
         // keep the form filled with the search data
         $this->form->setData( TSession::getValue('GrapesComponentsList_filter_data') );
@@ -51,8 +51,8 @@ class GrapesComponentsList extends TPage
         $this->datagrid->width = "100%";
         
         // creates the datagrid columns
-        $col_id    = new TDataGridColumn('id', 'Id', 'right', '20%');
-        $col_name  = new TDataGridColumn('name', 'Name', 'left', '80%');
+        $col_id    = new TDataGridColumn('id', 'Código', 'right', '20%');
+        $col_name  = new TDataGridColumn('name', 'Nome', 'left', '80%');
         
         $this->datagrid->addColumn($col_id);
         $this->datagrid->addColumn($col_name);

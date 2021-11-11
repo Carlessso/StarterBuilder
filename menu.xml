@@ -108,11 +108,11 @@
               <icon>fas:desktop fa-fw</icon>
               <action>GrapesClassesList</action>
           </menuitem>
-          <menuitem label='Components'>
+          <menuitem label='Componentes'>
               <icon>fas:desktop fa-fw</icon>
               <action>GrapesComponentsList</action>
           </menuitem>
-          <menuitem label='Pages'>
+          <menuitem label='Páginas'>
               <icon>fas:desktop fa-fw</icon>
               <action>GrapesPagesList</action>
           </menuitem>

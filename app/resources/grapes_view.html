@@ -31,7 +31,7 @@ rel="stylesheet"
 <script src="dist/grapesjs-style-bg.min.js"></script>
 
 <div id="container-form-page" class="container-form-page">
-    <div class="close-form-page"><h5 class="title-form-page">Save Page</h5><i onclick="handleClickCloseForm()" class="fas fa-window-close"></i></div>
+    <div class="close-form-page"><h5 class="title-form-page">Salvar página</h5><i onclick="handleClickCloseForm()" class="fas fa-window-close"></i></div>
     <form class="form-starter-page" name="form-starter-page" id="form-starter-page" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
       <div id="i6hl">
         <label>Código</label>
@@ -42,7 +42,7 @@ rel="stylesheet"
         <input required="required" id="nome" style="width: 70%;"name="name" type="text"/>
       </div>
       <button id="tbutton_btn_salvar" name="btn_salvar" class="btn btn-primary" style="float: right; font-size: 16px; padding: 5px 20px; margin: 20px 150px;" onclick="grapesSave();return false;" aria-label="Salvar">
-        <span>Save</span> 
+        <span>Salvar</span> 
     </button> 
     </form>
 </div>
@@ -548,7 +548,7 @@ rel="stylesheet"
     
     function openBackWindow()
     {
-        __adianti_question('Back to List', 'Do you wanna back to list?', function() {__adianti_load_page('index.php?class=GrapesPagesList&method=onBackFromGrapes');} , function() {} , 'Yes', 'Stay');
+        __adianti_question('Voltar para a listagem', 'Você quer voltar para a listagem?', function() {__adianti_load_page('index.php?class=GrapesPagesList&method=onBackFromGrapes');} , function() {} , 'Sim', 'Ficar');
     }
 
     function handleClickCloseForm()

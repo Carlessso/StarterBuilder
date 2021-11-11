@@ -29,7 +29,7 @@ class GrapesClassForm extends TPage
         
         // creates the form
         $this->form = new BootstrapFormBuilder('form_classe');
-        $this->form->setFormTitle('Class Form');
+        $this->form->setFormTitle('Formulário de classes');
         $this->form->setClientValidation(true);
         
         // create the form fields
@@ -48,16 +48,16 @@ class GrapesClassForm extends TPage
         $id->setEditable(FALSE);
         
         // add the form fields
-        $this->form->addFields( [new TLabel('ID')], [$id] );
-        $this->form->addFields( [new TLabel('Name', 'red')], [$name] );
-        $this->form->addFields( [new TLabel('Page', 'red')], [$page] );
+        $this->form->addFields( [new TLabel('Código')], [$id] );
+        $this->form->addFields( [new TLabel('Nome', 'red')], [$name] );
+        $this->form->addFields( [new TLabel('Página', 'red')], [$page] );
         
-        $name->addValidation( 'Name', new TRequiredValidator);
+        $name->addValidation( 'Nome', new TRequiredValidator);
         
         // define the form action
-        $this->form->addAction('Save', new TAction(array($this, 'onSave'), ['static' => 1]), 'fa:save green');
-        $this->form->addActionLink('Clear',  new TAction(array($this, 'onClear')), 'fa:eraser red');
-        $this->form->addActionLink('Listing',  new TAction(array('GrapesClassesList', 'onReload')), 'fa:table blue');
+        $this->form->addAction('Salvar', new TAction(array($this, 'onSave'), ['static' => 1]), 'fa:save green');
+        $this->form->addActionLink('Limpar',  new TAction(array($this, 'onClear')), 'fa:eraser red');
+        $this->form->addActionLink('Listar',  new TAction(array('GrapesClassesList', 'onReload')), 'fa:table blue');
         // wrap the page content using vertical box
         $vbox = new TVBox;
         $vbox->style = 'width: 100%';

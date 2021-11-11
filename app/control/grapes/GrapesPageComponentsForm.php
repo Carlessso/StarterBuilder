@@ -17,7 +17,7 @@ class GrapesPageComponentsForm extends TPage
         
         // creates the form
         $this->form = new BootstrapFormBuilder('form_page_component');
-        $this->form->setFormTitle('<h5>Page</h5>');
+        $this->form->setFormTitle('<h5>Página</h5>');
         $this->form->setProperty('style', 'margin:0;border:0');
         $this->form->setClientValidation(true);
         
@@ -45,15 +45,15 @@ class GrapesPageComponentsForm extends TPage
         $id->setSize('30%');
         
         // add master form fields
-        $this->form->addFields( [new TLabel('ID')], [$id] );
+        $this->form->addFields( [new TLabel('Código')], [$id] );
 
-        $this->form->addFields( [new TLabel('Name (*)', '#FF0000')], [$name] );
+        $this->form->addFields( [new TLabel('Nome (*)', '#FF0000')], [$name] );
         
-        $this->form->addContent( ['<h5>COMPONENTS</h5><hr>'] );
+        $this->form->addContent( ['<h5>COMPONENTES</h5><hr>'] );
         $this->form->addFields( [ $page_component_unqid], [$page_component_id] );
-        $this->form->addFields( [ new TLabel('Component (*)', '#FF0000') ], [$component_id]);
+        $this->form->addFields( [ new TLabel('Componente (*)', '#FF0000') ], [$component_id]);
         
-        $add_component = TButton::create('add_component', [$this, 'onComponentAdd'], 'Add', 'fa:plus-circle green');
+        $add_component = TButton::create('add_component', [$this, 'onComponentAdd'], 'Adicionar', 'fa:plus-circle green');
         $add_component->getAction()->setParameter('static','1');
         $this->form->addFields( [], [$add_component] );
         
@@ -66,8 +66,8 @@ class GrapesPageComponentsForm extends TPage
         
         $col_uniq  = new TDataGridColumn('uniqid', 'Uniqid', 'center', '10%');
         $col_id    = new TDataGridColumn('id', 'ID', 'center', '10%');
-        $col_cid   = new TDataGridColumn('component_id', 'Component id', 'center', '20%');
-        $col_cname = new TDataGridColumn('component_id', 'Component name', 'center', '60%');
+        $col_cid   = new TDataGridColumn('component_id', 'Código componente', 'center', '20%');
+        $col_cname = new TDataGridColumn('component_id', 'Nome componente', 'center', '60%');
 
         $col_cname->setTransformer(function($value) {
             return Component::findInTransaction('starter', $value)->name;
@@ -99,9 +99,9 @@ class GrapesPageComponentsForm extends TPage
         $panel->getBody()->style = 'overflow-x:auto';
         $this->form->addContent( [$panel] );
         
-        $this->form->addAction( 'Save',  new TAction([$this, 'onSave'], ['static'=>'1']), 'fa:save green');
-        $this->form->addAction( 'Clear', new TAction([$this, 'onClear']), 'fa:eraser red');
-        $this->form->addActionLink('Listing',  new TAction(array('GrapesPagesList', 'onReload')), 'fa:table blue');
+        $this->form->addAction( 'Salvar',  new TAction([$this, 'onSave'], ['static'=>'1']), 'fa:save green');
+        $this->form->addAction( 'Limpar', new TAction([$this, 'onClear']), 'fa:eraser red');
+        $this->form->addActionLink('Listar',  new TAction(array('GrapesPagesList', 'onReload')), 'fa:table blue');
         
         // create the page container
         $container = new TVBox;
